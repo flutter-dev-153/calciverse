@@ -1,5 +1,8 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:math_expressions/math_expressions.dart';
+
 
 class Invalid {
   static const Infinity = 'Infinity';
@@ -17,6 +20,13 @@ class ExpressionHandler with ChangeNotifier {
   final Parser _parser = Parser();
   var _equationInput = '';
   Function _addToHistoryHandler;
+  final ContextModel _contextModel = ContextModel();
+
+  ExpressionHandler() {
+    _contextModel.bindVariable(Variable("è"), Number(math.e));
+    _contextModel.bindVariable(Variable("pi"), Number(math.pi));
+    _contextModel.bindFunction(Log(Number(10), Variable('x')));
+  }
 
   String get equationInput {
     return _equationInput.substring(0);
@@ -48,26 +58,31 @@ class ExpressionHandler with ChangeNotifier {
     notifyListeners();
   }
 
-  ContextModel _getContextModel() {
-    final contextModel = ContextModel();
-    return contextModel;
+  double _bound(double n) {
+    // Accuracy starts to degrade as around 2^63 is the
+    // highest number, double can store accurately.
+    return n > math.pow(10, 16) ? double.infinity : n;
   }
 
   void _evaluate() {
     var query = _equationInput;
+    var historyResult = Invalid.InvalidExpression;
     try {
       final expression = _parser.parse(_equationInput);
-      final result = expression.evaluate(
+      final result = _bound(expression.evaluate(
         EvaluationType.REAL,
-        _getContextModel(),
-      ) as double;
+        _contextModel,
+      ) as double);
       final processedResult =
-          result % 1 == 0 ? result.toInt() : result.toStringAsFixed(2);
+          result % 1 == 0 ? result.toInt() : result.toStringAsFixed(8);
+      historyResult =
+          (result % 1 == 0 ? result.toInt() : result.toStringAsFixed(2))
+              .toString();
       _equationInput = '$processedResult';
     } catch (error) {
       _equationInput = Invalid.InvalidExpression;
     } finally {
-      addToHistory(query, _equationInput);
+      addToHistory(query, '$historyResult');
       notifyListeners();
     }
   }
@@ -82,6 +97,24 @@ class ExpressionHandler with ChangeNotifier {
         break;
       case 'x':
         _insert('*');
+        break;
+      case 'x!':
+        _insert('fact(');
+        break;
+      case 'x^y':
+        _insert('^');
+        break;
+      case 'è^x':
+        _insert('è^');
+        break;
+      case '10^x':
+        _insert('10^');
+        break;
+      case 'log(b, x)':
+        _insert('log(');
+        break;
+      case 'ln':
+        _insert('ln(');
         break;
       default:
         _insert(character);

@@ -8,11 +8,13 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
     return AppBar(
       title: Center(
         child: Text(
           title,
-          style: TextStyle(fontSize: height / 2.1),
+          style: TextStyle(fontSize: height / 2.1, color: themeData.accentColor,),
         ),
       ),
     );

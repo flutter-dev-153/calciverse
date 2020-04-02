@@ -14,19 +14,22 @@ class HistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
     return Container(
       height: itemHeight,
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          color: Colors.black,
+          color: themeData.primaryColor,
         ),
         color: const Color.fromRGBO(235, 235, 235, 1),
       ),
       child: Center(
         child: Text(
           value,
-          style: TextStyle(fontSize: itemHeight / 2.5),
+          style: TextStyle(
+              fontSize: itemHeight / 2.5, color: themeData.primaryColor),
         ),
       ),
     );
@@ -58,14 +61,23 @@ class HistoryListDisplay extends StatelessWidget {
               color: themeData.primaryColor, width: parentHeight * 0.01),
         ),
       ),
-      child: ListView.builder(
-        reverse: true,
-        itemBuilder: (ctx, index) => HistoryItem(
-          value: historyItems[index],
-          itemHeight: containerHeight / 4.5,
-        ),
-        itemCount: historyItems.length,
-      ),
+      child: historyItems.length == 0
+          ? Center(
+              child: Text(
+              'History is empty!',
+              style: TextStyle(
+                fontSize: 20,
+                color: themeData.primaryColor,
+              ),
+            ))
+          : ListView.builder(
+              reverse: true,
+              itemBuilder: (ctx, index) => HistoryItem(
+                value: historyItems[index],
+                itemHeight: containerHeight / 4.5,
+              ),
+              itemCount: historyItems.length,
+            ),
     );
   }
 }
