@@ -10,6 +10,7 @@ import './screens/more_tools/linear_equations/3_by_3_linear_equations_solver_scr
 import './screens/more_tools/quadratic_equations_screen.dart';
 import './screens/more_tools/matrix_operations/matrix_operations_screen.dart';
 import './screens/more_tools/matrix_operations/inverse_of_a_matrix_screen.dart';
+import './screens/more_tools/matrix_operations/co_factors_of_matrix_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,6 +48,8 @@ class MyApp extends StatelessWidget {
               ThreeByThreeLinearEquationsSolverScreen(),
           MatrixOperationsScreen.routeName: (ctx) => MatrixOperationsScreen(),
           InverseOfAMatrixScreen.routeName: (ctx) => InverseOfAMatrixScreen(),
+          CoFactorsOfAMatrixScreen.routeName: (ctx) =>
+              CoFactorsOfAMatrixScreen(),
         },
       ),
     );

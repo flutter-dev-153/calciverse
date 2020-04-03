@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../widgets/app_drawer.dart';
 import '../../../widgets/custom_app_bar.dart';
 import './inverse_of_a_matrix_screen.dart';
+import './co_factors_of_matrix_screen.dart';
 
 class MatrixOperationsScreen extends StatefulWidget {
   static const routeName = '/matrix-operations';
@@ -10,7 +11,7 @@ class MatrixOperationsScreen extends StatefulWidget {
 
   static const matrixOperationsTypes = const [
     const {'displayText': 'Inverse', 'routeName': InverseOfAMatrixScreen.routeName},
-    const {'displayText': 'Co-factors', 'routeName': ''},
+    const {'displayText': 'Co-factors', 'routeName': CoFactorsOfAMatrixScreen.routeName},
   ];
 
   @override
