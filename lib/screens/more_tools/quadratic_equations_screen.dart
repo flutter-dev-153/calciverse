@@ -1,111 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:extended_math/extended_math.dart';
 
-import '../../../helpers/linear_equations_handler.dart';
+import '../../widgets/super_script.dart';
+import '../../widgets/app_drawer.dart';
+import '../../widgets/custom_app_bar.dart';
 
-import './linear_equations_screen.dart';
-
-class TwoByTwoLinearEquationsSolverScreen extends StatefulWidget {
-  static const routeName = LinearEquationsScreen.routeName + '/2-by-2';
+class QuadraticEquationsScreen extends StatefulWidget {
+  static const routeName = '/quadratic-equations';
 
   @override
-  _TwoByTwoLinearEquationsSolverScreenState createState() =>
-      _TwoByTwoLinearEquationsSolverScreenState();
+  _QuadraticEquationsScreenState createState() =>
+      _QuadraticEquationsScreenState();
 }
 
-class _TwoByTwoLinearEquationsSolverScreenState
-    extends State<TwoByTwoLinearEquationsSolverScreen> {
-  var x1Controller = TextEditingController();
-  var y1Controller = TextEditingController();
-  var res1Controller = TextEditingController();
-  var x2Controller = TextEditingController();
-  var y2Controller = TextEditingController();
-  var res2Controller = TextEditingController();
+// EQUATION OF FORM: ax^2 + bx + c = 0
+
+class _QuadraticEquationsScreenState extends State<QuadraticEquationsScreen> {
+  var aController = TextEditingController();
+  var bController = TextEditingController();
+  var cController = TextEditingController();
 
   // 3rd argument to check if solutions exist or not
-  final List<double> resultValues = [null, null, 1];
-
-  bool areInputsValid() {
-    if (x1Controller.text.isEmpty ||
-        double.tryParse(x1Controller.text) == null) {
-      return false;
-    }
-
-    if (y1Controller.text.isEmpty ||
-        double.tryParse(y1Controller.text) == null) {
-      return false;
-    }
-
-    if (res1Controller.text.isEmpty ||
-        double.tryParse(res1Controller.text) == null) {
-      return false;
-    }
-
-    if (x2Controller.text.isEmpty ||
-        double.tryParse(x2Controller.text) == null) {
-      return false;
-    }
-
-    if (y2Controller.text.isEmpty ||
-        double.tryParse(y2Controller.text) == null) {
-      return false;
-    }
-
-    if (res2Controller.text.isEmpty ||
-        double.tryParse(res2Controller.text) == null) {
-      return false;
-    }
-
-    return true;
-  }
-
-  void showErrorSnackBar(BuildContext ctx) {
-    Scaffold.of(ctx).hideCurrentSnackBar();
-    Scaffold.of(ctx).showSnackBar(SnackBar(
-      content: Text(
-        'Invalid values!',
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Theme.of(context).errorColor),
-      ),
-      backgroundColor: Theme.of(context).primaryColor,
-      duration: Duration(seconds: 1),
-    ));
-  }
-
-  void calculate(BuildContext ctx) {
-    if (areInputsValid() == false) {
-      showErrorSnackBar(ctx);
-      return;
-    }
-
-    // To close the keyboard
-    FocusScope.of(context).unfocus();
-
-    var result = LinearEquationsHandler.solveEquationsInTwoVariables(
-      x1: double.parse(x1Controller.text),
-      y1: double.parse(y1Controller.text),
-      res1: double.parse(res1Controller.text),
-      x2: double.parse(x2Controller.text),
-      y2: double.parse(y2Controller.text),
-      res2: double.parse(res2Controller.text),
-    );
-
-    setState(() {
-      resultValues[0] = result[0];
-      resultValues[1] = result[1];
-    });
-  }
+  final List<Complex> resultValues = [null, null];
 
   void clearFields() {
     setState(() {
-      x1Controller.text = "";
-      y1Controller.text = "";
-      res1Controller.text = "";
-      x2Controller.text = "";
-      y2Controller.text = "";
-      res2Controller.text = "";
+      aController.text = "";
+      bController.text = "";
+      cController.text = "";
       resultValues[0] = null;
       resultValues[1] = null;
-      resultValues[2] = 1;
     });
   }
 
@@ -136,36 +60,91 @@ class _TwoByTwoLinearEquationsSolverScreenState
   }
 
   Row getInputRow(
-    TextEditingController x,
-    TextEditingController y,
-    TextEditingController res,
+    TextEditingController a,
+    TextEditingController b,
+    TextEditingController c,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        getInputBox(x),
+        getInputBox(a),
+        SuperScript(
+          child: styledText('x'),
+          value: '2',
+        ),
+        styledText('+'),
+        getInputBox(b),
         styledText('x'),
         styledText('+'),
-        getInputBox(y),
-        styledText('y'),
+        getInputBox(c),
         styledText('='),
-        getInputBox(res),
+        styledText('0'),
       ],
     );
+  }
+
+  bool areInputsValid() {
+    if (aController.text.isEmpty || double.tryParse(aController.text) == null) {
+      return false;
+    }
+
+    if (bController.text.isEmpty || double.tryParse(bController.text) == null) {
+      return false;
+    }
+
+    if (cController.text.isEmpty || double.tryParse(cController.text) == null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  void showErrorSnackBar(BuildContext ctx) {
+    Scaffold.of(ctx).hideCurrentSnackBar();
+    Scaffold.of(ctx).showSnackBar(SnackBar(
+      content: Text(
+        'Invalid values!',
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Theme.of(context).errorColor),
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 1),
+    ));
+  }
+
+  void calculate(BuildContext ctx) {
+    if (areInputsValid() == false) {
+      showErrorSnackBar(ctx);
+      return;
+    }
+
+    // To close the keyboard
+    FocusScope.of(context).unfocus();
+
+    final a = double.parse(aController.text);
+    final b = double.parse(bController.text);
+    final c = double.parse(cController.text);
+
+    var result = QuadraticEquation(a: a, b: b, c: c).calculate();
+
+    setState(() {
+      resultValues[0] = result['x1'];
+      resultValues[1] = result['x2'];
+    });
+  }
+
+  String complexToString(Complex number) {
+    if (number.im == 0) {
+      return '${number.re.toStringAsFixed(3)}';
+    }
+    return '${number.re.toStringAsFixed(3)} + i(${number.im.toStringAsFixed(3)})';
   }
 
   Widget getOutputBox(int index) {
     final themeData = Theme.of(context);
 
-    final output = resultValues[2] == 0
-        ? 'No solutions.'
-        : (resultValues[index] == null
-            ? ''
-            : ((resultValues[index] - resultValues[index].round() > -0.000001 &&
-                    resultValues[index] - resultValues[index].round() <
-                        0.000001)
-                ? resultValues[index].round()
-                : resultValues[index].toStringAsFixed(5)));
+    final output =
+        resultValues[index] == null ? '' : complexToString(resultValues[index]);
 
     return Container(
       width: 200,
@@ -183,7 +162,7 @@ class _TwoByTwoLinearEquationsSolverScreenState
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        styledText(index == 0 ? 'x' : 'y'),
+        styledText(index == 0 ? 'x1' : 'x2'),
         styledText('='),
         getOutputBox(index),
       ],
@@ -194,9 +173,17 @@ class _TwoByTwoLinearEquationsSolverScreenState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
+    final mediaQuery = MediaQuery.of(context);
+    final viewHeight = mediaQuery.size.height - mediaQuery.padding.top;
+    final appBarHeight = viewHeight * 0.1;
+
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('2-by-2 Solver')),
+        appBar: CustomAppBar(
+          title: 'Quadratic Equations',
+          height: appBarHeight,
+        ),
+        drawer: AppDrawer(),
         body: SingleChildScrollView(
           child: Builder(
             builder: (ctx) => Container(
@@ -208,7 +195,7 @@ class _TwoByTwoLinearEquationsSolverScreenState
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: Container(
-                        height: 180,
+                        height: 150,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -221,12 +208,11 @@ class _TwoByTwoLinearEquationsSolverScreenState
                             ),
                             Expanded(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: <Widget>[
                                   getInputRow(
-                                      x1Controller, y1Controller, res1Controller),
-                                  getInputRow(
-                                      x2Controller, y2Controller, res2Controller),
+                                      aController, bController, cController),
                                 ],
                               ),
                             ),
@@ -281,7 +267,8 @@ class _TwoByTwoLinearEquationsSolverScreenState
                             ),
                             Expanded(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: <Widget>[
                                   getOutputRow(0),
                                   getOutputRow(1),
@@ -300,5 +287,6 @@ class _TwoByTwoLinearEquationsSolverScreenState
         ),
       ),
     );
+    ;
   }
 }

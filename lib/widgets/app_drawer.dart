@@ -1,12 +1,16 @@
-import 'package:calciverse/screens/more_tools/linear_equations/linear_equations_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/more_tools/linear_equations/linear_equations_screen.dart';
+import '../screens/more_tools/quadratic_equations_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   static const listItems = [
     {'displayText': 'Home', 'routeName': '/'},
     {'displayText': 'Linear Equations', 'routeName': LinearEquationsScreen.routeName },
-//    {'displayText': 'Quadratic Equations', 'routeName': '/'},
+    {'displayText': 'Quadratic Equations', 'routeName': QuadraticEquationsScreen.routeName},
+  // Matrix operations: inverse, co-factors
 //    {'displayText': 'Combinatorics', 'routeName': '/'},
+  // Converters
   ];
 
   Widget buildListItem(

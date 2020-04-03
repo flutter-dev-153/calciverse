@@ -1,5 +1,6 @@
-import 'package:calciverse/helpers/linear_equations_handler.dart';
 import 'package:flutter/material.dart';
+
+import '../../../helpers/linear_equations_handler.dart';
 
 import './linear_equations_screen.dart';
 
@@ -154,9 +155,10 @@ class _ThreeByThreeLinearEquationsSolverScreenState
       z3Controller.text = "";
       res3Controller.text = "";
 
-      resultValues[0] = 0;
-      resultValues[1] = 0;
-      resultValues[2] = 0;
+      resultValues[0] = null;
+      resultValues[1] = null;
+      resultValues[2] = null;
+      resultValues[2] = 1;
     });
   }
 
@@ -249,122 +251,126 @@ class _ThreeByThreeLinearEquationsSolverScreenState
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('3-by-3 solver'),
-      ),
-      body: SingleChildScrollView(
-        child: Builder(
-          builder: (ctx) => Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(5),
-            child: Column(
-              children: <Widget>[
-                Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Container(
-                      height: 210,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Enter the values',
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: themeData.primaryColor,
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                getInputRow(
-                                  x1Controller,
-                                  y1Controller,
-                                  z1Controller,
-                                  res1Controller,
-                                ),
-                                getInputRow(
-                                  x2Controller,
-                                  y2Controller,
-                                  z2Controller,
-                                  res2Controller,
-                                ),
-                                getInputRow(
-                                  x3Controller,
-                                  y3Controller,
-                                  z3Controller,
-                                  res3Controller,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              MaterialButton(
-                                height: 35,
-                                minWidth: 70,
-                                elevation: 5,
-                                child: Text(
-                                  'CLEAR',
-                                  style:
-                                      TextStyle(color: themeData.accentColor),
-                                ),
-                                onPressed: clearFields,
+    final mediaQuery = MediaQuery.of(context);
+    final viewHeight = mediaQuery.size.height - mediaQuery.padding.top;
+    final appBarHeight = viewHeight * 0.1;
+
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text('3-by-3 Solver')),
+        body: SingleChildScrollView(
+          child: Builder(
+            builder: (ctx) => Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(5),
+              child: Column(
+                children: <Widget>[
+                  Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Container(
+                        height: 210,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Enter the values',
+                              style: TextStyle(
+                                fontSize: 25,
                                 color: themeData.primaryColor,
                               ),
-                              MaterialButton(
-                                height: 35,
-                                minWidth: 70,
-                                elevation: 5,
-                                child: Icon(
-                                  Icons.check,
-                                  size: 22,
-                                  color: themeData.accentColor,
-                                ),
-                                onPressed: () => calculate(ctx),
-                                color: themeData.primaryColor,
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Container(
-                      height: 150,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Text(
-                            'Result',
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: themeData.primaryColor,
                             ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  getInputRow(
+                                    x1Controller,
+                                    y1Controller,
+                                    z1Controller,
+                                    res1Controller,
+                                  ),
+                                  getInputRow(
+                                    x2Controller,
+                                    y2Controller,
+                                    z2Controller,
+                                    res2Controller,
+                                  ),
+                                  getInputRow(
+                                    x3Controller,
+                                    y3Controller,
+                                    z3Controller,
+                                    res3Controller,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                getOutputRow(0),
-                                getOutputRow(1),
-                                getOutputRow(2),
+                                MaterialButton(
+                                  height: 35,
+                                  minWidth: 70,
+                                  elevation: 5,
+                                  child: Text(
+                                    'CLEAR',
+                                    style:
+                                        TextStyle(color: themeData.accentColor),
+                                  ),
+                                  onPressed: clearFields,
+                                  color: themeData.primaryColor,
+                                ),
+                                MaterialButton(
+                                  height: 35,
+                                  minWidth: 70,
+                                  elevation: 5,
+                                  child: Icon(
+                                    Icons.check,
+                                    size: 22,
+                                    color: themeData.accentColor,
+                                  ),
+                                  onPressed: () => calculate(ctx),
+                                  color: themeData.primaryColor,
+                                )
                               ],
-                            ),
-                          ),
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Container(
+                        height: 150,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Text(
+                              'Result',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: themeData.primaryColor,
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  getOutputRow(0),
+                                  getOutputRow(1),
+                                  getOutputRow(2),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

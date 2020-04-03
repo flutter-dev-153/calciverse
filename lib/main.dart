@@ -7,6 +7,7 @@ import './screens/home_screen.dart';
 import './screens/more_tools/linear_equations/linear_equations_screen.dart';
 import './screens/more_tools/linear_equations/2_by_2_linear_equations_solver_screen.dart';
 import './screens/more_tools/linear_equations/3_by_3_linear_equations_solver_screen.dart';
+import './screens/more_tools/quadratic_equations_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,6 +41,8 @@ class MyApp extends StatelessWidget {
               TwoByTwoLinearEquationsSolverScreen(),
           ThreeByThreeLinearEquationsSolverScreen.routeName: (ctx) =>
               ThreeByThreeLinearEquationsSolverScreen(),
+          QuadraticEquationsScreen.routeName: (ctx) =>
+              QuadraticEquationsScreen(),
         },
       ),
     );
