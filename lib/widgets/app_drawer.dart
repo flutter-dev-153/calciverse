@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../screens/more_tools/linear_equations/linear_equations_screen.dart';
 import '../screens/more_tools/quadratic_equations_screen.dart';
+import '../screens/more_tools/matrix_operations/matrix_operations_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   static const listItems = [
     {'displayText': 'Home', 'routeName': '/'},
     {'displayText': 'Linear Equations', 'routeName': LinearEquationsScreen.routeName },
     {'displayText': 'Quadratic Equations', 'routeName': QuadraticEquationsScreen.routeName},
-  // Matrix operations: inverse, co-factors
+    {'displayText': 'Matrix operations', 'routeName': MatrixOperationsScreen.routeName},
 //    {'displayText': 'Combinatorics', 'routeName': '/'},
   // Converters
   ];
@@ -19,7 +20,7 @@ class AppDrawer extends StatelessWidget {
     String onPressedRoute,
   ) {
     return ListTile(
-      title: Text(displayText),
+      title: Text(displayText, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
       onTap: () {
         // Pop the drawer
         Navigator.of(context).pop();
@@ -53,7 +54,7 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            title: Text('More tools'),
+            title: Text('More tools', style: TextStyle(fontSize: 22),),
             automaticallyImplyLeading: false,
             // don't display back button
           ),

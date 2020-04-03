@@ -8,6 +8,8 @@ import './screens/more_tools/linear_equations/linear_equations_screen.dart';
 import './screens/more_tools/linear_equations/2_by_2_linear_equations_solver_screen.dart';
 import './screens/more_tools/linear_equations/3_by_3_linear_equations_solver_screen.dart';
 import './screens/more_tools/quadratic_equations_screen.dart';
+import './screens/more_tools/matrix_operations/matrix_operations_screen.dart';
+import './screens/more_tools/matrix_operations/inverse_of_a_matrix_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,12 +39,14 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           LinearEquationsScreen.routeName: (ctx) => LinearEquationsScreen(),
+          QuadraticEquationsScreen.routeName: (ctx) =>
+              QuadraticEquationsScreen(),
           TwoByTwoLinearEquationsSolverScreen.routeName: (ctx) =>
               TwoByTwoLinearEquationsSolverScreen(),
           ThreeByThreeLinearEquationsSolverScreen.routeName: (ctx) =>
               ThreeByThreeLinearEquationsSolverScreen(),
-          QuadraticEquationsScreen.routeName: (ctx) =>
-              QuadraticEquationsScreen(),
+          MatrixOperationsScreen.routeName: (ctx) => MatrixOperationsScreen(),
+          InverseOfAMatrixScreen.routeName: (ctx) => InverseOfAMatrixScreen(),
         },
       ),
     );

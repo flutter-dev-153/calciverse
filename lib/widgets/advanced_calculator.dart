@@ -20,7 +20,7 @@ class _AdvancedCalculatorState extends State<AdvancedCalculator> {
     [
       {'value': "(", 'backgroundColor': const Color.fromRGBO(200, 200, 200, 1)},
       {'value': ")", 'backgroundColor': const Color.fromRGBO(200, 200, 200, 1)},
-      {'value': "x!"}
+      {'value': "AC", 'backgroundColor': const Color.fromRGBO(200, 200, 200, 1)}
     ],
     [
       {'value': "Inv"},
