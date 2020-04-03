@@ -5,6 +5,7 @@ import '../providers/expression_handler.dart';
 import '../providers/history.dart';
 
 import '../widgets/custom_app_bar.dart';
+import '../widgets/app_drawer.dart';
 import '../widgets/display/calculations_display.dart';
 import '../widgets/simple_calculator.dart';
 import '../widgets/advanced_calculator.dart';
@@ -26,8 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double _totalHeight = 0;
   double _totalWidth = 0;
   var _isInit = true;
-  // TODO: change to true
-  var _displaySimple = false;
+  var _displaySimple = true;
 
   @override
   void didChangeDependencies() {
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Set the add-to-history handler in expression handler
       Provider.of<ExpressionHandler>(context, listen: false)
           .setAddToHistoryHandler(
-          Provider.of<History>(context, listen: false).addToHistory);
+              Provider.of<History>(context, listen: false).addToHistory);
     });
   }
 
@@ -113,59 +113,61 @@ class _HomeScreenState extends State<HomeScreen> {
     final appBarHeight = _totalHeight * 0.1;
     final horizontalPadding = _totalWidth * 0.02;
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(appBarHeight),
-        child: CustomAppBar(title: widget.title, height: appBarHeight),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: _totalHeight * 0.01,
-        ),
-        child: Container(
-          height: _totalHeight * 0.9,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                child: CalculationsDisplay(_totalHeight * 0.40),
-              ),
-              SizedBox(height: _totalHeight * 0.02),
-              if (_displaySimple)
-                Dismissible(
-                  key: const ValueKey('simple-calculator'),
-                  direction: DismissDirection.startToEnd,
-                  background: getDismissBackground(
-                    themeData,
-                    CrossAxisAlignment.start,
-                    'Advanced',
-                    Icons.arrow_back,
-                    paddingLeft: 20,
-                  ),
-                  onDismissed: (_) => swapSimpleAdvancedCalculatorDisplay(),
-                  child: Padding(
-                    padding: EdgeInsets.only(right: horizontalPadding),
-                    child: simpleCalculator,
-                  ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar(title: widget.title, height: appBarHeight),
+        drawer: AppDrawer(),
+        drawerEdgeDragWidth: 0,
+        // To avoid opening the drawer by swiping from the left edge
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: _totalHeight * 0.01,
+          ),
+          child: Container(
+            height: _totalHeight * 0.9,
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: CalculationsDisplay(_totalHeight * 0.40),
                 ),
-              if (_displaySimple == false)
-                Dismissible(
-                  key: const ValueKey('advanced-calculator'),
-                  direction: DismissDirection.endToStart,
-                  background: getDismissBackground(
-                    themeData,
-                    CrossAxisAlignment.end,
-                    'Simple',
-                    Icons.arrow_forward,
-                    paddingRight: 20,
+                SizedBox(height: _totalHeight * 0.02),
+                if (_displaySimple)
+                  Dismissible(
+                    key: const ValueKey('simple-calculator'),
+                    direction: DismissDirection.startToEnd,
+                    background: getDismissBackground(
+                      themeData,
+                      CrossAxisAlignment.start,
+                      'Advanced',
+                      Icons.arrow_back,
+                      paddingLeft: 20,
+                    ),
+                    onDismissed: (_) => swapSimpleAdvancedCalculatorDisplay(),
+                    child: Padding(
+                      padding: EdgeInsets.only(right: horizontalPadding),
+                      child: simpleCalculator,
+                    ),
                   ),
-                  onDismissed: (_) => swapSimpleAdvancedCalculatorDisplay(),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: horizontalPadding),
-                    child: advancedCalculator,
-                  ),
-                )
-            ],
+                if (_displaySimple == false)
+                  Dismissible(
+                    key: const ValueKey('advanced-calculator'),
+                    direction: DismissDirection.endToStart,
+                    background: getDismissBackground(
+                      themeData,
+                      CrossAxisAlignment.end,
+                      'Simple',
+                      Icons.arrow_forward,
+                      paddingRight: 20,
+                    ),
+                    onDismissed: (_) => swapSimpleAdvancedCalculatorDisplay(),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: horizontalPadding),
+                      child: advancedCalculator,
+                    ),
+                  )
+              ],
+            ),
           ),
         ),
       ),
