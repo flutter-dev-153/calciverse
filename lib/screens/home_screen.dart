@@ -11,9 +11,11 @@ import '../widgets/simple_calculator.dart';
 import '../widgets/advanced_calculator.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String title;
+  final String appTitle;
 
-  HomeScreen({this.title});
+  HomeScreen({
+    @required this.appTitle,
+  });
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -23,11 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
   SimpleCalculator simpleCalculator;
   AdvancedCalculator advancedCalculator;
 
-  MediaQueryData _mediaQuery;
-  double _totalHeight = 0;
-  double _totalWidth = 0;
   var _isInit = true;
   var _displaySimple = true;
+  double viewHeight = 0;
+  double viewWidth = 0;
 
   @override
   void didChangeDependencies() {
@@ -36,11 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_isInit) {
       _isInit = false;
 
-      _mediaQuery = MediaQuery.of(context);
-      _totalHeight = _mediaQuery.size.height - _mediaQuery.padding.top;
-      _totalWidth = _mediaQuery.size.width;
+      final mediaQuery = MediaQuery.of(context);
+      viewHeight = mediaQuery.size.height - mediaQuery.padding.top;
+      viewWidth = mediaQuery.size.width;
 
-      final calculatorButtonsContainerHeight = _totalHeight * 0.46;
+      final calculatorButtonsContainerHeight = viewHeight * 0.46;
 
       setState(() {
         simpleCalculator = SimpleCalculator(calculatorButtonsContainerHeight);
@@ -110,28 +111,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    final appBarHeight = _totalHeight * 0.1;
-    final horizontalPadding = _totalWidth * 0.02;
+    final appBarHeight = viewHeight * 0.1;
+    final horizontalPadding = viewWidth * 0.02;
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: widget.title, height: appBarHeight),
+        appBar: CustomAppBar(title: widget.appTitle, height: appBarHeight),
         drawer: AppDrawer(),
         drawerEdgeDragWidth: 0,
         // To avoid opening the drawer by swiping from the left edge
         body: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: _totalHeight * 0.01,
+            vertical: viewHeight * 0.01,
           ),
           child: Container(
-            height: _totalHeight * 0.9,
+            height: viewHeight * 0.9,
             child: Column(
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                  child: CalculationsDisplay(_totalHeight * 0.40),
+                  child: CalculationsDisplay(viewHeight * 0.40),
                 ),
-                SizedBox(height: _totalHeight * 0.02),
+                SizedBox(height: viewHeight * 0.02),
                 if (_displaySimple)
                   Dismissible(
                     key: const ValueKey('simple-calculator'),

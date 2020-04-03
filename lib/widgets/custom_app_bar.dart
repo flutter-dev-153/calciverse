@@ -4,7 +4,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   final String title;
   final double height;
 
-  CustomAppBar({this.title, this.height});
+  CustomAppBar({
+    @required this.title,
+    @required this.height,
+  });
 
   @override
   Widget get child => null;
@@ -25,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
             child: Text(
               title,
               style: TextStyle(
-                fontSize: height / 2.1,
+                fontSize: height / 2.5,
                 color: themeData.accentColor,
               ),
             ),
