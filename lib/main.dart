@@ -20,6 +20,7 @@ import './screens/more_tools/miscellaneous/miscellaneous_screen.dart';
 import './screens/more_tools/miscellaneous/is_prime_screen.dart';
 import './screens/more_tools/miscellaneous/highest_common_factor_screen.dart';
 import './screens/more_tools/miscellaneous/least_common_multiple_screen.dart';
+import './screens/more_tools/miscellaneous/mean_of_numbers_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
               HighestCommonFactorScreen(),
           LeastCommonMultipleScreen.routeName: (ctx) =>
               LeastCommonMultipleScreen(),
+          MeanOfNumbersScreen.routeName: (ctx) => MeanOfNumbersScreen(),
         },
       ),
     );

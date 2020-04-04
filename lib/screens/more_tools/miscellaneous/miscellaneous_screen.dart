@@ -5,6 +5,7 @@ import '../../../widgets/custom_app_bar.dart';
 import './is_prime_screen.dart';
 import './highest_common_factor_screen.dart';
 import './least_common_multiple_screen.dart';
+import './mean_of_numbers_screen.dart';
 
 class MiscellaneousScreen extends StatefulWidget {
   static const routeName = '/miscellaneous-screen';
@@ -13,7 +14,7 @@ class MiscellaneousScreen extends StatefulWidget {
     const {'displayText': 'Is Prime', 'routeName': IsPrimeScreen.routeName},
     const {'displayText': 'Least common multiple', 'routeName': LeastCommonMultipleScreen.routeName},
     const {'displayText': 'Highest common Factor', 'routeName': HighestCommonFactorScreen.routeName},
-    const {'displayText': 'Mean of numbers', 'routeName': ''},
+    const {'displayText': 'Mean of numbers', 'routeName': MeanOfNumbersScreen.routeName},
   ];
 
   @override
