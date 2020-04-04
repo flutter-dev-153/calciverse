@@ -19,6 +19,7 @@ import './screens/more_tools/combinatorics/multinomial_coefficients_screen.dart'
 import './screens/more_tools/miscellaneous/miscellaneous_screen.dart';
 import './screens/more_tools/miscellaneous/is_prime_screen.dart';
 import './screens/more_tools/miscellaneous/highest_common_factor_screen.dart';
+import './screens/more_tools/miscellaneous/least_common_multiple_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
           IsPrimeScreen.routeName: (ctx) => IsPrimeScreen(),
           HighestCommonFactorScreen.routeName: (ctx) =>
               HighestCommonFactorScreen(),
+          LeastCommonMultipleScreen.routeName: (ctx) =>
+              LeastCommonMultipleScreen(),
         },
       ),
     );
