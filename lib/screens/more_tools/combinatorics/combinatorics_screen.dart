@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../../../widgets/app_drawer.dart';
 import './permutations_screen.dart';
+import './combinations_screen.dart';
 
 class CombinatoricsScreen extends StatefulWidget {
   static const routeName = '/combinatorics';
 
   static const combinatoricsSubTypes = const [
     const {'displayText': 'Permutations', 'routeName': PermutationsScreen.routeName},
-    const {'displayText': 'Combinations', 'routeName': ''},
+    const {'displayText': 'Combinations', 'routeName': CombinationsScreen.routeName},
     const {'displayText': 'Multinomial Coefficient', 'routeName': ''},
   ];
 
