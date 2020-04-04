@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/more_tools/linear_equations/linear_equations_screen.dart';
 import '../screens/more_tools/quadratic_equations_screen.dart';
 import '../screens/more_tools/matrix_operations/matrix_operations_screen.dart';
+import '../screens/more_tools/combinatorics/combinatorics_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   static const listItems = [
@@ -10,8 +11,8 @@ class AppDrawer extends StatelessWidget {
     {'displayText': 'Linear Equations', 'routeName': LinearEquationsScreen.routeName },
     {'displayText': 'Quadratic Equations', 'routeName': QuadraticEquationsScreen.routeName},
     {'displayText': 'Matrix operations', 'routeName': MatrixOperationsScreen.routeName},
-//    {'displayText': 'Combinatorics', 'routeName': '/'},
-  // Converters
+    {'displayText': 'Combinatorics', 'routeName': CombinatoricsScreen.routeName},
+    // Miscellaneous: isprime, lcm, gcd, mean
   ];
 
   Widget buildListItem(
