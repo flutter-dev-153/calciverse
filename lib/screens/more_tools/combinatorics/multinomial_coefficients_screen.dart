@@ -86,7 +86,11 @@ class _MultinomialCoefficientsScreenState
     FocusScope.of(context).unfocus();
 
     setState(() {
-      result = multinomialCoefficients(n, list);
+      try {
+        result = multinomialCoefficients(n, list);
+      } catch (error) {
+        result = BigInt.from(-1);
+      }
     });
   }
 
@@ -126,21 +130,20 @@ class _MultinomialCoefficientsScreenState
 
   Widget getOutputBox() {
     final themeData = Theme.of(context);
-    final controller = TextEditingController();
-    controller.text = result == null ? '' : result.toString();
+    final output = result == null
+        ? ''
+        : (result == BigInt.from(-1)
+            ? 'Currently not supporting huge numbers!'
+            : result.toString());
 
-    return Container(
-      width: 150,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1, color: themeData.primaryColor),
-      ),
-      child: TextField(
-        style: TextStyle(fontSize: 16),
-        textAlign: TextAlign.center,
-        controller: controller,
-        enabled: false,
-        minLines: 5,
-        maxLines: 13,
+    return SingleChildScrollView(
+      child: Container(
+        width: 150,
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            border: Border.all(width: 1, color: themeData.primaryColor)),
+        child: Text(output,
+            style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
       ),
     );
   }
@@ -156,15 +159,18 @@ class _MultinomialCoefficientsScreenState
     );
   }
 
-  Row getOutputRow(String data) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        styledText(data),
-        styledText('='),
-        getOutputBox(),
-      ],
+  Widget getOutputRow(String data) {
+    return Container(
+      height: 90,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          styledText(data),
+          styledText('='),
+          getOutputBox(),
+        ],
+      ),
     );
   }
 
@@ -205,11 +211,13 @@ class _MultinomialCoefficientsScreenState
                           width: double.infinity,
                           child: Text(
                             'comma separated +ve integers',
-                          textAlign: TextAlign.end,
+                            textAlign: TextAlign.end,
                             softWrap: true,
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -245,39 +253,21 @@ class _MultinomialCoefficientsScreenState
                 width: 300,
                 height: 230,
               ),
-              SizedBox(
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'Output',
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              getOutputRow('Answer'),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+              Card(
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  width: 300,
+                  height: 150,
+                  child: Column(
+                    children: <Widget>[
+                      const Text('Output', style: TextStyle(fontSize: 25)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: getOutputRow('Answer'),
+                      ),
+                    ],
                   ),
                 ),
-                width: 300,
-                height: result == null
-                    ? 200
-                    : (result <
-                            BigInt.parse(
-                                '1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
-                        ? 260
-                        : 340),
               )
             ],
           ),

@@ -45,16 +45,12 @@ class _CombinationsScreenState extends State<CombinationsScreen> {
   BigInt combinations(n, r) {
     var res = BigInt.from(1);
     int j = 1;
-    for (int i = 1; i <= n; i ++) {
+    for (int i = n - r + 1; i <= n; i ++) {
       res *= BigInt.from(i);
-      if (j <= n - r) {
+      if (j <= r) {
         res = BigInt.from(res / BigInt.from(j));
       }
       j++;
-    }
-
-    for (int k = 1; k <= r; k++) {
-      res = BigInt.from(res / BigInt.from(k));
     }
     return res;
   }
@@ -117,21 +113,14 @@ class _CombinationsScreenState extends State<CombinationsScreen> {
 
   Widget getOutputBox() {
     final themeData = Theme.of(context);
-    final controller = TextEditingController();
-    controller.text = result == null ? '' : result.toString();
+    final output = result == null ? '' : result.toString();
 
-    return Container(
-      width: 150,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1, color: themeData.primaryColor),
-      ),
-      child: TextField(
-        style: TextStyle(fontSize: 16),
-        textAlign: TextAlign.center,
-        controller: controller,
-        enabled: false,
-        minLines: 5,
-        maxLines: 13,
+    return SingleChildScrollView(
+      child: Container(
+        width: 150,
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(border: Border.all(width: 1, color: themeData.primaryColor)),
+        child: Text(output, style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
       ),
     );
   }
@@ -147,15 +136,18 @@ class _CombinationsScreenState extends State<CombinationsScreen> {
     );
   }
 
-  Row getOutputRow(String data) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        styledText(data),
-        styledText('='),
-        getOutputBox(),
-      ],
+  Widget getOutputRow(String data) {
+    return Container(
+      height: 90,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          styledText(data),
+          styledText('='),
+          getOutputBox(),
+        ],
+      ),
     );
   }
 
@@ -226,34 +218,22 @@ class _CombinationsScreenState extends State<CombinationsScreen> {
                 width: 300,
                 height: 220,
               ),
-              SizedBox(
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'Output',
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              getOutputRow('Answer'),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+              Card(
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  width: 300,
+                  height: 150,
+                  child: Column(
+                    children: <Widget>[
+                      const Text('Output', style: TextStyle(fontSize: 25)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: getOutputRow('Answer'),
+                      ),
+                    ],
                   ),
                 ),
-                width: 300,
-                height: result == null ? 200 : (result < BigInt.parse('1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000') ? 260 : 340),
-              )
+              ),
             ],
           ),
         ),
