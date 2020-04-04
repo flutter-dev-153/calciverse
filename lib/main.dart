@@ -15,6 +15,7 @@ import './screens/more_tools/matrix_operations/co_factors_of_matrix_screen.dart'
 import './screens/more_tools/combinatorics/combinatorics_screen.dart';
 import './screens/more_tools/combinatorics/permutations_screen.dart';
 import './screens/more_tools/combinatorics/combinations_screen.dart';
+import './screens/more_tools/combinatorics/multinomial_coefficients_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
           CombinatoricsScreen.routeName: (ctx) => CombinatoricsScreen(),
           PermutationsScreen.routeName: (ctx) => PermutationsScreen(),
           CombinationsScreen.routeName: (ctx) => CombinationsScreen(),
+          MultinomialCoefficientsScreen.routeName: (ctx) =>
+              MultinomialCoefficientsScreen(),
         },
       ),
     );
