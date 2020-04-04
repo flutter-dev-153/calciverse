@@ -16,6 +16,8 @@ import './screens/more_tools/combinatorics/combinatorics_screen.dart';
 import './screens/more_tools/combinatorics/permutations_screen.dart';
 import './screens/more_tools/combinatorics/combinations_screen.dart';
 import './screens/more_tools/combinatorics/multinomial_coefficients_screen.dart';
+import './screens/more_tools/miscellaneous/miscellaneous_screen.dart';
+import './screens/more_tools/miscellaneous/is_prime_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -61,6 +63,8 @@ class MyApp extends StatelessWidget {
           CombinationsScreen.routeName: (ctx) => CombinationsScreen(),
           MultinomialCoefficientsScreen.routeName: (ctx) =>
               MultinomialCoefficientsScreen(),
+          MiscellaneousScreen.routeName: (ctx) => MiscellaneousScreen(),
+          IsPrimeScreen.routeName: (ctx) => IsPrimeScreen(),
         },
       ),
     );
