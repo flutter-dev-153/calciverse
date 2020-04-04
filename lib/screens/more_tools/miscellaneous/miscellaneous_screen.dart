@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../widgets/app_drawer.dart';
 import '../../../widgets/custom_app_bar.dart';
 import './is_prime_screen.dart';
+import './highest_common_factor_screen.dart';
 
 class MiscellaneousScreen extends StatefulWidget {
   static const routeName = '/miscellaneous-screen';
@@ -10,7 +11,7 @@ class MiscellaneousScreen extends StatefulWidget {
   static const miscellaneousTools = const [
     const {'displayText': 'Is Prime', 'routeName': IsPrimeScreen.routeName},
     const {'displayText': 'Least common multiple', 'routeName': ''},
-    const {'displayText': 'Highest common Factor', 'routeName': ''},
+    const {'displayText': 'Highest common Factor', 'routeName': HighestCommonFactorScreen.routeName},
     const {'displayText': 'Mean of numbers', 'routeName': ''},
   ];
 
