@@ -143,7 +143,7 @@ class _MultinomialCoefficientsScreenState
         decoration: BoxDecoration(
             border: Border.all(width: 1, color: themeData.primaryColor)),
         child: Text(output,
-            style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
+            style: const TextStyle(fontSize: 16), textAlign: TextAlign.center),
       ),
     );
   }
@@ -209,7 +209,7 @@ class _MultinomialCoefficientsScreenState
                         ),
                         Container(
                           width: double.infinity,
-                          child: Text(
+                          child: const Text(
                             'comma separated +ve integers',
                             textAlign: TextAlign.end,
                             softWrap: true,

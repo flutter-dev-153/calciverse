@@ -1,4 +1,4 @@
-package com.example.calciverse
+package com.vighnesh153.calciverse
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

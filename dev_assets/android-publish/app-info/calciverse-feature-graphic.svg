@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  height="500" width="1024" viewBox="0 0 1024 500">
+  <polygon points="0,0 1024,0 1024,500 0,500" fill="#0A192F"/>
+  
+  
+  <path d="M 377 50 L 637 50 M 657 70 L 657 330 M 637 350 L 377 350 M 357 330 L 357 70" stroke="#64FFDA" fill="transparent" stroke-width="8"/>
+  <path d="M 637 50 Q 657 50 657 70" stroke="#64FFDA" fill="transparent" stroke-width="8" /> 
+  <path d="M 657 330 Q 657 350 637 350" stroke="#64FFDA" fill="transparent" stroke-width="8" />
+  <path d="M 377 350 Q 357 350 357 330" stroke="#64FFDA" fill="transparent" stroke-width="8" />
+  <path d="M 357 70 Q 357 50 377 50" stroke="#64FFDA" fill="transparent" stroke-width="8" />
+  
+  
+  <path d="M 397 80 L 617 80 L 617 130 L 397 130 L 397 80" stroke="#64FFDA" fill="transparent" stroke-width="8"/>
+  
+  
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="397,150 447,150 447,200 397,200"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="482,150 532,150 532,200 482,200"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="567,150 617,150 617,200 567,200"
+  />
+  
+  
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="397,220 447,220 447,270 397,270"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="482,220 532,220 532,270 482,270"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="567,220 617,220 617,270 567,270"
+  />
+  
+
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="397,290 447,290 447,320 397,320"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="482,290 617,290 617,320 482,320"
+  />
+
+
+ <text x="352" y="430" class="text" fill="#64FFDA">Calciverse</text>
+<style>
+	.text {
+    	font: bold 70px serif;
+    }
+</style>
+</svg>

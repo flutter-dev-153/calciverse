@@ -1,5 +1,5 @@
 name: calciverse
-description: A new Flutter project.
+description: Calculators
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -32,6 +32,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.4
+
+flutter_icons:
+  android: true
+  image_path: "dev_assets/calciverse.png"
+  adaptive_icon_background: "#0A192F"
+  adaptive_icon_foreground: "dev_assets/calciverse-adaptive.png"
 
 dependency_overrides:
   quiver: ^2.1.2

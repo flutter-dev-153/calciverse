@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  height="400" width="400" viewBox="0 0 400 400">
+  <polygon points="0,0 400,0 400,400 0,400" fill="#0A192F"/>
+  
+  
+  <path d="M 70 50 L 330 50 M 350 70 L 350 330 M 330 350 L 70 350 M 50 330 L 50 70" stroke="#64FFDA" fill="transparent" stroke-width="8"/>
+  <path d="M 330 50 Q 350 50 350 70" stroke="#64FFDA" fill="transparent" stroke-width="8" /> 
+  <path d="M 350 330 Q 350 350 330 350" stroke="#64FFDA" fill="transparent" stroke-width="8" />
+  <path d="M 70 350 Q 50 350 50 330" stroke="#64FFDA" fill="transparent" stroke-width="8" />
+  <path d="M 50 70 Q 50 50 70 50" stroke="#64FFDA" fill="transparent" stroke-width="8" />
+  
+  
+  <path d="M 90 80 L 310 80 L 310 130 L 90 130 L 90 80" stroke="#64FFDA" fill="transparent" stroke-width="8"/>
+  
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="90,150 140,150 140,200 90,200"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="175,150 225,150 225,200 175,200"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="260,150 310,150 310,200 260,200"
+  />
+  
+  
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="90,220 140,220 140,270 90,270"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="175,220 225,220 225,270 175,270"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="260,220 310,220 310,270 260,270"
+  />
+  
+
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="90,290 140,290 140,320 90,320"
+  />
+  <polygon fill="#64FFDA" stroke="#64FFDA" stroke-width="8"
+  	points="175,290 310,290 310,320 175,320"
+  />
+</svg>
